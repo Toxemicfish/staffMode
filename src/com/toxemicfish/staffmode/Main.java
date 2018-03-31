@@ -1,7 +1,10 @@
 package com.toxemicfish.staffmode;
 
 import com.toxemicfish.staffmode.commands.ModCommand;
+import com.toxemicfish.staffmode.events.modEvents;
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -37,6 +40,8 @@ public class Main extends JavaPlugin {
     }
 
     private void registerEvents() {
+        PluginManager pm = Bukkit.getPluginManager();
+        pm.registerEvents(new modEvents(), this);
     }
 
     public static Main getInstance() {
