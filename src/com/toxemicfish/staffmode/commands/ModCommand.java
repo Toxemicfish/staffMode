@@ -2,6 +2,7 @@ package com.toxemicfish.staffmode.commands;
 
 import com.toxemicfish.staffmode.Main;
 import com.toxemicfish.staffmode.utils.ItemStackBuilder;
+import com.toxemicfish.staffmode.utils.Messages;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,6 +35,7 @@ public class ModCommand implements CommandExecutor {
                 ItemStack im = new ItemStackBuilder(Material.COMPASS).withName("&3Player finder").build();
 
                 player.getInventory().addItem(im);
+                Messages.MOD_ON.send(player);
                 //---------------
             } else {
                 PLUGIN.ISmod.remove(uuid);
@@ -43,6 +45,7 @@ public class ModCommand implements CommandExecutor {
 
                 player.getInventory().setArmorContents(null);
                 player.getInventory().setArmorContents(PLUGIN.inventoryArmorContents.get(player.getName()));
+                Messages.MOD_OFF.send(player);
             }
 
         } else {

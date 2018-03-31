@@ -7,6 +7,9 @@ import org.bukkit.entity.Player;
 
 public enum Messages {
 
+    MOD_ON("&aMod &eactivated"),
+    MOD_OFF("&aMod &edeactivate"),
+
     BAD_INPUT("&c%s is not a number.");
 
     private String message;

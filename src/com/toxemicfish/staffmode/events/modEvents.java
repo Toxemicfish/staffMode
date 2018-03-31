@@ -11,22 +11,40 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class modEvents implements Listener{
 
     Main PLUGIN = Main.getInstance();
+    
+    @EventHandler
+    public void onClickInv(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        if(PLUGIN.ISmod.contains(player.getUniqueId())) {
+            if(event.getSlotType() == InventoryType.SlotType.CRAFTING) {
+                event.setCancelled(true);
+            }
+        }
+    }
 
     @EventHandler
-    public void onClick(InventoryClickEvent event) {
+    public void onClickArmor(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (PLUGIN.ISmod.contains(player.getUniqueId())) {
-            switch (event.getSlotType()) {
-                case CRAFTING:
-                case ARMOR:
-                case FUEL:
-                    event.setCancelled(true);
+        if(PLUGIN.ISmod.contains(player.getUniqueId())) {
+            if(event.getSlotType() == InventoryType.SlotType.ARMOR) {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onClickFuel(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        if(PLUGIN.ISmod.contains(player.getUniqueId())) {
+            if(event.getSlotType() == InventoryType.SlotType.FUEL) {
+                event.setCancelled(true);
             }
         }
     }
