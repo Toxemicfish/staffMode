@@ -3,6 +3,7 @@ package com.toxemicfish.staffmode;
 import com.toxemicfish.staffmode.commands.ModCommand;
 import com.toxemicfish.staffmode.events.modEvents;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,13 +26,29 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        getConfig().options().copyDefaults(true);
+        saveConfig();
+        reloadConfig();
+
         registerCommands();
         registerEvents();
+
+
+
     }
 
     @Override
     public void onDisable() {
 
+        for(UUID uuid : ISmod) {
+            Player p = (Player) Bukkit.getPlayer(uuid);
+
+            String UUID = p.getUniqueId().toString();
+
+            getConfig().set("Players." + uuid, true);
+            saveConfig();
+            reloadConfig();
+        }
     }
 
     private void registerCommands() {

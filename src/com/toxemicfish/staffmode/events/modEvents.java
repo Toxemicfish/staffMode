@@ -11,6 +11,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -18,7 +19,15 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class modEvents implements Listener{
 
     Main PLUGIN = Main.getInstance();
-    
+
+    @EventHandler
+    public void itemMove(InventoryMoveItemEvent event) {
+        Player player = (Player) event.getInitiator();
+        if(PLUGIN.ISmod.contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+
     @EventHandler
     public void onClickInv(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
